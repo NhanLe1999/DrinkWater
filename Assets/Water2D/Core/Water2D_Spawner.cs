@@ -1227,6 +1227,11 @@
         {
             while (true)
             {
+                if (WaterDropsObjects == null || WaterDropsObjects[0] == null)
+                {
+                    SetupParticles();
+                }    
+
                 for (int i = 0; i < WaterDropsObjects.Length; i++)
                 {
 
