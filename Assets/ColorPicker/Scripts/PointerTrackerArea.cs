@@ -15,19 +15,20 @@ public class PointerTrackerArea : MonoBehaviour, IPointerDownHandler, IPointerUp
     public OnDrag Drag;
 
     private RectTransform _transform;
-    private Canvas _parentCanvas;
+    [SerializeField] Canvas _parentCanvas;
+
+    [SerializeField] private RectTransform _rectTrParent;
 
     #endregion
 
     private void Awake()
     {
         _transform = transform as RectTransform;
-        _parentCanvas = GetComponentInParent<Canvas>();
     }
 
     public Vector2 Normalize(Vector2 position)
     {
-        return new Vector2(position.x / _transform.rect.width, position.y / _transform.rect.height);
+        return new Vector2(position.x / _transform.rect.width, (position.y - _rectTrParent.anchoredPosition.y - 50) / _transform.rect.height);
     }
     public Vector2 DeNormalize(Vector2 position)
     {
@@ -47,11 +48,11 @@ public class PointerTrackerArea : MonoBehaviour, IPointerDownHandler, IPointerUp
     {
         while (true)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_transform, Input.mousePosition, _parentCanvas.worldCamera, out Vector2 position);
-
+            var position = HelperManager.ConvertWorldToCanvasPoint(_parentCanvas, Input.mousePosition);
+            Debug.Log("ponit: " + position);
             var rect = _transform.rect;
             position.x = Mathf.Clamp(position.x, rect.min.x, rect.max.x);
-            position.y = Mathf.Clamp(position.y, rect.min.y, rect.max.y);
+            position.y = Mathf.Clamp(position.y, rect.min.y - _transform.rect.height, rect.max.y) ;
 
             Drag?.Invoke(this, position);
 

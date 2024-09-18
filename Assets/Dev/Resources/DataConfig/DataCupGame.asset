@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459d48259e291a94fb336cafcfda804a, type: 3}
+  m_Name: DataCupGame
+  m_EditorClassIdentifier: 
+  dataCups:
+  - sprImgSelect: {fileID: 21300000, guid: d21124b8d4df315438dd6c25ba754c1f, type: 3}
+    prefabCup: {fileID: 2704468495165797091, guid: 6be29c5bf95413548b4a0e16bb43aee0, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 33621a6e5baee4248acfd0630d202857, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 2b2144c8dd78d6a4cb4a02ea30551ae1, type: 3}
+    prefabCup: {fileID: 2706561113411494580, guid: 555de6b2b8dcc894e93a6ae7be5c2d7e, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 36110a56b1143de4c919a1da4d60a62f, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 39714c227928dce4aa28549bb4b27e41, type: 3}
+    prefabCup: {fileID: 1367433417095712584, guid: 97a43d3390f7aaf40b6f3443009baf2e, type: 3}
+    sprImgChange: {fileID: 21300000, guid: ca79da335e9d9ca42b465301d2b46f31, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 9895c87dbf7bbb1458f78e66db868c4d, type: 3}
+    prefabCup: {fileID: 7493548127680505343, guid: 09ac0d5bc96bd7c438a0658f0b4824a6, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 1f06b78cbc7f5bc459f6771df7c19292, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 134a335d575c1bd4cabeaaff4de956e9, type: 3}
+    prefabCup: {fileID: 7132509377482456651, guid: 44ba6db345f96cb4b91317e192945950, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 8f90d57e78c404444adba883896f6461, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 6e495690b6dd5b54ca7b5a73cee40a5c, type: 3}
+    prefabCup: {fileID: 2453684510546300045, guid: b89138eb12be57f47b14c0c124ad5b9d, type: 3}
+    sprImgChange: {fileID: 21300000, guid: e990ae1db8fc14e458cc31bcc1ef39e3, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: ce1aa98b2f08e28419146b3c3eb153d6, type: 3}
+    prefabCup: {fileID: 5893804267300556340, guid: cd8368afe0a40a147b52bab093314e77, type: 3}
+    sprImgChange: {fileID: 21300000, guid: d6c5df0e03d41774baca468904bb887f, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: e3ec03aea9832af4eb60168ab722aa88, type: 3}
+    prefabCup: {fileID: 4004806290368078760, guid: eee0545294057a740b009293a9be43ab, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 684fccc0d70152f4e8cc0002ba8e2a57, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 50678753fb9e6cd4cab13f3cdb44bc23, type: 3}
+    prefabCup: {fileID: 7687025273193922607, guid: 7f554845e2da09649a08696013ec58a7, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 6e31382cffbc896479eab9b78e0ae8eb, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 4f5c3965ef9e8ff45b3698fcf6ae42c0, type: 3}
+    prefabCup: {fileID: 270574968571199407, guid: 3155673edf76fb047814d4b1226d8487, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 0933f315d887bfa45971b6fad8c9a624, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 95f8a0b6368a70f49b5016496caeb220, type: 3}
+    prefabCup: {fileID: 4269482307058046682, guid: 8ce9bb6a4e465d94cbc0699b5b00c400, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 55a28b26786617c47aebb8065c6b1fc7, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: c355b7f545d8af94dbb44a9535e0785f, type: 3}
+    prefabCup: {fileID: 5287684341185801894, guid: c9303a4e2b541584d8181cf5090408c1, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 7de24590d0c5fd547bde8cd008c02418, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 93d23b20f84bfc6428dd2dc4641527c7, type: 3}
+    prefabCup: {fileID: 6892829641442037182, guid: d52dcc7229037964284030efaaf3f8eb, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 41700c42d68ae554b8619d2fc0c5d319, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 23ee3f777fa02fd469eba2c50cae2902, type: 3}
+    prefabCup: {fileID: 7618232901524187015, guid: 8292a1e0b4810104fb65d408b3984bc5, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 2ac2446d22e56eb4ca143499281715ae, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 1917446d3a034b040a30b68c9d9d509e, type: 3}
+    prefabCup: {fileID: 3480731376307701578, guid: f7e823c5226b18b45859d6a62dab244b, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 16610010dfdb80f4f82c0fb31a831e42, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 853a90fdbfecf724d83fa481b076b3f2, type: 3}
+    prefabCup: {fileID: 3069466844259036182, guid: c95ba5bea4810ff4ca4ed8853e32f34f, type: 3}
+    sprImgChange: {fileID: 21300000, guid: cfcae6e8e9b48ef48be9667ab20fa9fc, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 3a2d7898630076842aabe7c7e078e823, type: 3}
+    prefabCup: {fileID: 7960961001741864416, guid: 2681903d89ce6674a8f32a85a91667cc, type: 3}
+    sprImgChange: {fileID: 21300000, guid: d0b638c1905d8164ab14652f8fc8facc, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: e6400d41218291141bc29f57bf96122f, type: 3}
+    prefabCup: {fileID: 345141474146702998, guid: 244bb004fd9108242ad68fdc2b84763d, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 9c0c8d184d9fab74681d46ef99739670, type: 3}
+  - sprImgSelect: {fileID: 21300000, guid: 19e6ecd1a0589054a99716a9ee07be80, type: 3}
+    prefabCup: {fileID: 7702868145649867449, guid: a8dee5b36a2e21541816fa89de988b52, type: 3}
+    sprImgChange: {fileID: 21300000, guid: 1d0b3d95583c621418e039f4aec3ae6f, type: 3}
