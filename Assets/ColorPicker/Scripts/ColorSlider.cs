@@ -1,5 +1,6 @@
 ﻿#region Includes
 using System;
+using System.Collections;
 using TS.ColorPicker;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ public class ColorSlider : MonoBehaviour
     private Slider _slider;
     private PointerTrackerArea _tracker;
 
+    [SerializeField] RectTransform _rectTransform;
+
     #endregion
 
     private void Awake()
@@ -34,11 +37,20 @@ public class ColorSlider : MonoBehaviour
 
         _tracker = GetComponent<PointerTrackerArea>();
 
+        this.StartCoroutine(ChangPoint());
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (_tracker == null) { throw new Exception("Missing PointerTrackerArea"); }
 #endif
-
     }
+
+    IEnumerator ChangPoint()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _rectTransform.offsetMin = new Vector2(-26, _rectTransform.offsetMin.y); 
+        _rectTransform.offsetMax = new Vector2(6, _rectTransform.offsetMax.y);
+    }    
+
     private void Start()
     {
         _slider.onValueChanged.AddListener(Slider_ValueChanged);

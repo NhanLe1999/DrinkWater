@@ -18,10 +18,7 @@ public class InputColorChannels : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _inputs.Length; i++)
-        {
-            _inputs[i].ValueChanged = InputChannel_ValueChanged;
-        }
+      
     }
 
     public void SetValues(float[] values)

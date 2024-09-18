@@ -15,8 +15,8 @@ public class RectPicker : MonoBehaviour
 
     public Vector2 Value
     {
-        get { return _handle.transform.localPosition; }
-        set { _handle.transform.localPosition = value; }
+        get { return Vector2.one; }
+        set { }
     }
     public Vector2 NormalizedValue
     {

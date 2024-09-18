@@ -18,7 +18,7 @@ public class HsbPicker : MonoBehaviour
     public OnValueChanged ValueChanged;
 
     public float Hue { get { return _colorSlider.Value; } }
-    public float Saturation { get { return _picker.NormalizedValue.x; } }
+    public float Saturation { get { return 0.1f; } }
     public float Brightness { get { return _picker.NormalizedValue.y; } }
 
     private RectPicker _picker;
@@ -62,7 +62,6 @@ public class HsbPicker : MonoBehaviour
 
     private void UpdateImageColor(float hue)
     {
-        _imageColor.color = Color.HSVToRGB(hue, 1, 1);
     }
     private void InvokeValueChanged()
     {

@@ -43,22 +43,12 @@ namespace TS.ColorPicker
         {
             _hsbPicker.ValueChanged = HsbPicker_ValueChanged;
             _inputRgb.ValueChanged = InputColorChannels_RGB_ValueChanged;
-            _inputHex.ValueChanged = InputHex_ValueChanged;
 
             enabled = false;
         }
         private void Update()
         {
-            var mousePosition = Input.mousePosition;
-            var color = _screenTexture.GetPixel((int)mousePosition.x, (int)mousePosition.y);
-
-            UpdateColor(color);
-
-            if (Input.anyKeyDown)
-            {
-                Destroy(_screenTexture);
-                enabled = false;
-            }
+           
         }
 
         public void Open()
@@ -73,12 +63,8 @@ namespace TS.ColorPicker
 
         private void HsbPicker_ValueChanged(HsbPicker sender, float hue, float saturation, float brightness)
         {
-            var color = Color.HSVToRGB(hue, saturation, brightness);
-
-            SetCurrentColor(color);
-
-            SetRgbChannels(color);
-            SetHexValue(color);
+            var color = Color.HSVToRGB(hue, 1.0f, 1.0f);
+            DringCupManager.Instance.SetColor(color);
         }
         private void InputColorChannels_RGB_ValueChanged(InputColorChannels sender, Color color)
         {
