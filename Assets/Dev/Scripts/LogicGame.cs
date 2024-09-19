@@ -46,6 +46,7 @@ public class LogicGame : SingletonMono<LogicGame>
         }
 
         var cup = Instantiate(ScStaticScene.dataCup.prefabCup, parentCup);
+        currentDrinkCupManager = cup.GetComponent<DringCupManager>();
         cup.transform.position = pointCup.position;
     }
 

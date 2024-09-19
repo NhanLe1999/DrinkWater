@@ -23,4 +23,17 @@ public class ItemChangeCup : MonoBehaviour
         imgIc.sprite = dataCup.sprImgChange;
         imgIc.SetNativeSize();
     }
+
+    public void OnChangeCup()
+    {
+        var cpns = GameObject.FindObjectsOfType<MetaballParticleClass>();
+
+        foreach (var c in cpns)
+        {
+            Destroy(c.gameObject);
+        }
+
+        ScStaticScene.dataCup = dataCup;
+        LogicGame.Instance.LoadUi();
+    }    
 }

@@ -6,7 +6,7 @@ public class ResizeObjectWithCanvas : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
     [SerializeField] RectTransform rectTransformTr;
-    float y = 256 + 35;
+    [SerializeField] float y = 291;
     void Start()
     {
         var rectTransForm = GetComponent<RectTransform>();
@@ -16,10 +16,9 @@ public class ResizeObjectWithCanvas : MonoBehaviour
         {
             var newXSize = sizeCanvas.y - y;
             rectTransForm.sizeDelta = new Vector2(rectTransForm.sizeDelta.x, newXSize);
+        }
+        rectTransformTr.sizeDelta = new Vector2(rectTransformTr.sizeDelta.x, rectTransForm.sizeDelta.y - 151);
 
-            rectTransformTr.sizeDelta = rectTransForm.sizeDelta;
-
-        }    
     }
 
     // Update is called once per frame
