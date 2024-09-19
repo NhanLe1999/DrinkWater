@@ -1200,7 +1200,7 @@ namespace Water2D
 
             bool wasRunning = false;
 
-            if (WSpawner.Water2DEmissionType == Water2D_Spawner.EmissionType.ParticleSystem)
+            /*if (WSpawner.Water2DEmissionType == Water2D_Spawner.EmissionType.ParticleSystem)
             {
                 // Stop first
                 if (Application.isPlaying)
@@ -1226,24 +1226,17 @@ namespace Water2D
             }
             else
             {
-
                 ColliderFiller cf = WSpawner.gameObject.GetComponent<ColliderFiller>();
                 cf.collider = WSpawner.gameObject.GetComponent<Collider2D>();
                 cf.collider.offset = Vector2.zero;
                 cf.Refresh();
                 cf.Fill();
-               
-                
             }
-
-           
-
-
 
             SerializedObject m_CustomSettings = SettingsManager.GetSerializedSettings();
             bool flipTex = AssetUtility.LoadPropertyAsBool("w2d_FlipCameraTexture", m_CustomSettings);
 
-            ResizeQuadEffectController.RebuildTextures(flipTex? 1:0);
+            ResizeQuadEffectController.RebuildTextures(flipTex? 1:0);*/
 
         }
 

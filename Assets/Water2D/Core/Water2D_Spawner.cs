@@ -466,13 +466,6 @@
 
             WaterDropsObjects = new GameObject[DropCount];
 
-            
-
-                
-           
-
-
-
             for (int i = 0; i < WaterDropsObjects.Length; i++)
             {
                 WaterDropsObjects[i] = Instantiate(DropObject, gameObject.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;

@@ -16,78 +16,45 @@ public enum StateGame
 
 public class LogicGame : SingletonMono<LogicGame>
 {
-    public Vector2 SizeCamera = Vector2.zero;
     public Transform TrsObj = null;
-
     public Transform TrsObjUp = null;
 
+    public Transform pointCup = null;
+
+    public DataCupGame dataCupGame = null;
 
     public float baseGravity = -9.81f; 
-    public float maxGravity = -20.0f;
-
-    private ClickWater _currentWater2dSpawn;
-
-    [SerializeField] Camera _currentCamera;
+    [SerializeField] Transform parentCup = null;
+    private DringCupManager currentDrinkCupManager = null;
 
     bool isDown = false;
 
     private void Start()
     {
-      //  SizeCamera = HelperManager.GetSizeCamera();
+        LoadUi();
+    }
+
+    public void LoadUi()
+    {
+        if(ScStaticScene.dataCup == null)
+        {
+            return;
+        }
+        if(currentDrinkCupManager != null)
+        {
+            Destroy(currentDrinkCupManager.gameObject);
+        }
+
+        var cup = Instantiate(ScStaticScene.dataCup.prefabCup, parentCup);
+        cup.transform.position = pointCup.position;
     }
 
     private void Update()
     {
-        if (!SystemInfo.supportsAccelerometer)
-        {
-            //Debug.Log("Accelerometer not supported on this device");
-        }
-        else
+        if (SystemInfo.supportsAccelerometer)
         {
             Vector3 acceleration = Input.acceleration;
-            Physics2D.gravity = new Vector2(acceleration.x * 7.81f, acceleration.y * 7.81f);
-
-            Debug.Log("Accelerometer supported on this device " + Physics2D.gravity);
+            Physics2D.gravity = new Vector2(acceleration.x * Mathf.Abs(baseGravity), acceleration.y * Mathf.Abs(baseGravity));
         }
-
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            _currentWater2dSpawn?._Spawner?.StopSpawning();
-
-            Ray ray = _currentCamera.ScreenPointToRay(Input.mousePosition);
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            mouseScreenPosition.z = -_currentCamera.transform.position.z;
-            Vector3 mouseWorldPosition = _currentCamera.ScreenToWorldPoint(mouseScreenPosition);
-            RaycastHit2D[] hits = Physics2D.RaycastAll(mouseWorldPosition, Vector2.zero);
-
-            foreach (var hit in hits)
-            {
-                if (hit.collider != null)
-                {
-                    var cpnEmptyHOle = hit.collider.GetComponent<ClickWater>();
-                    if (cpnEmptyHOle != null)
-                    {
-                        _currentWater2dSpawn = cpnEmptyHOle;
-                        break;
-                    }
-                }
-            }
-
-            isDown = true;
-
-            _currentWater2dSpawn?._Spawner?.Spawn();
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDown = false;
-            
-        }
-
-        if(!isDown)
-        {
-            _currentWater2dSpawn?._Spawner?.StopSpawning();
-            _currentWater2dSpawn = null;
-        }    */
     }
 }

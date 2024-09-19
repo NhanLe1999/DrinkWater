@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -6,6 +7,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public static class HelperManager
 {
@@ -109,6 +111,24 @@ public static class HelperManager
     public static double DateTimeToUnixTimestamp(DateTime dateTime)
     {
         return (dateTime - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+    }
+
+    #endregion
+
+    #region LOAD_SCENE
+    public static void OnLoadScene(string scene)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+    }
+
+    async public static UniTask LoadScene(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoad.isDone)
+        {
+            await UniTask.Yield();
+        }
     }
 
     #endregion
