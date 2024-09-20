@@ -139,9 +139,9 @@ TextureImporter:
       name: toping_1_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 29
         y: 815
-        width: 261
+        width: 243
         height: 174
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

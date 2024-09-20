@@ -24,13 +24,10 @@
 		}
 	}
 
-   
-
     [ExecuteInEditMode]
     [SelectionBase]
     public class Water2D_Spawner : MonoBehaviour
     {
-
         public enum EmissionType {
             ParticleSystem,
             FillerCollider
@@ -60,338 +57,162 @@
 
         }
 
-        // used it to store the unique id between spawners collection.
         public int HashID = -1;
 
-        /// <summary>
-        /// The type of Water spawner (Regular/Toon/Refracting)).
-        /// </summary>
         public EnumTypes Water2DType = EnumTypes.Regular;
-
-        /// <summary>
-        /// The emission type (ParticleSystem/FillerCollider)).
-        /// </summary>
         public EmissionType Water2DEmissionType = EmissionType.ParticleSystem;
 
-
-        /// <summary>
-        /// The collider shape type (box, circle, polygon)
-        /// </summary>
         public FillerColliderType Water2DFillerType = FillerColliderType.Box;
 
-        /// <summary>
-        /// The fill is inverse?
-        /// </summary>
         public bool FillerColliderMasked = false;
 
-        /// <summary>
-        /// The type of pipeline spawner (Legacy or URP(LWRP)).
-        /// </summary>
+
         public string Water2DRenderType = "";
 
-        /// <summary>
-        /// The version of the system.
-        /// </summary>
         public string Water2DVersion = "1.2";
 
 
         public GameObject DropObject;
         public GameObject[] WaterDropsObjects;
 
-        /// <summary>
-        /// The tag of all particles inside this spawner
-        /// </summary>
+
         public string ParticlesTag = "Metaball_liquid";
 
-        
-        /// <summary>
-        /// This means that the spawner won't be update in every change of state and you can generate the amount of fluid in Editor for use in Play mode later.
-        /// When this property is off, the spawner will be refresh at the end of the application runtime.
-        /// </summary>
         public bool PersistentFluid = false;
 
-        /// <summary>
-        /// The size of each drop.
-        /// </summary>
-        //[Range (0f,2f)]
         public float size = .45f;
 
-
-        /// <summary>
-        /// If particle can down the scale over lifetime.
-        /// </summary>
         public bool ScaleDown = false;
 
-
-        /// <summary>
-        /// The life time of each particle.
-        /// </summary>
         //[Range (0f,100f)]
         public float LifeTime = 5f;
 
-
-        /// <summary>
-        /// The delay between particles emission.
-        /// </summary>
         //[Range (0f,.3f)]
         public float DelayBetweenParticles = 0.05f;
 
-
-        // [Header("Trail")]
-        /// <summary>
-        /// The Trail size on Start.
-        /// </summary>
         //[Range(0f, 2f)]
         public float TrailStartSize = .4f;
 
-        /// <summary>
-		/// The Trail size on End.
-		/// </summary>
         //[Range(0f, 2f)]
         public float TrailEndSize = .4f;
 
-        /// <summary>
-		/// The Trail time between Start - End.
-		/// </summary>
         //[Range(0f, 2f)]
         public float TrailDelay = .1f;
 
-
-        /// <summary>
-        /// Actual water material.
-        /// </summary>
         public Material WaterMaterial;
 
-        /// <summary>
-        /// Is shader a Refracting, Toon or Regular style ?
-        /// </summary>
         public bool StyleByID;
 
-        /// <summary>
-        /// The sorting order ID
-        /// </summary>
         public int Sorting;
 
-        /// <summary>
-        /// The color category scheme
-        /// </summary>
         public int ColorScheme = 1;
 
-        /// <summary>
-        /// Fill Color of the particle [Toon/CutoOut shader]
-        /// </summary>
         public Color FillColor = new Color(0f, 112 / 255f, 1f);
 
-        /// <summary>
-        /// Stroke Color of the particle [Toon/CutoOut shader]
-        /// </summary>
         public Color StrokeColor = new Color(4 / 255f, 156 / 255f, 1f);
 
         public Color _lastStrokeColor = new Color(4 / 255f, 156 / 255f, 1f);
 
-        /// <summary>
-        ///Allow blending colors with neighbor particles
-        /// </summary>
         public bool Blending = false;
 
         public bool _lastBlending = false;
 
-
-        /// <summary>
-        /// Threshold alpha value[Toon/CutoOut shader]
-        /// </summary>
         public float AlphaCutOff = .2f;
 
-        /// <summary>
-        /// Threshold alpha stroke value [Toon/CutoOut shader]
-        /// </summary>
+
         public float AlphaStroke = .2f;
 
-        /// <summary>
-        /// Tint Color of the particle [Refracting shader]
-        /// </summary>
         public Color TintColor = new Color(0f, 112 / 255f, 1f);
 
-        /// <summary>
-        /// Intensity Color of the particle [Refracting shader]
-        /// </summary>
         public float Intensity = .5f;
 
-        /// <summary>
-        /// Amplify Mag of UV  [Refracting shader]
-        /// </summary>
         public float LensMag = 1.2f;
 
-        /// <summary>
-        /// Distortion of UV [Refracting shader]
-        /// </summary>
         public float Distortion = .5f;
 
-        /// <summary>
-        /// Distortion of UV [Refracting shader]
-        /// </summary>
         public float DistortionSpeed = .5f;
 
-        /// <summary>
-        /// Is glow effect enabled
-        /// </summary>
         public bool GlowEffect = false;
 
-        /// <summary>
-        /// The color of the glow
-        /// </summary>
         public Color GlowColor = new Color(1f,1f,1f,.4f);
 
-        /// <summary>
-        /// the spread size of the glow
-        /// </summary>
         public float GlowSize = 1.5f;
 
-        /// <summary>
-        /// Order in rendering the glow sprite
-        /// </summary>
         public int GlowSortingOrder = -1;
 
         [SerializeField] bool _lastGlowEnabledValue = false;
        
-
-        //[Header("Speed & direction")]
-        /// <summary>
-        /// The initial speed of particles after spawn.
-        /// </summary>
         public Vector2 initSpeed = new Vector2(1f, -1.8f);
 
-        /// <summary>
-        /// Amount of speed with which the particle is created
-        /// </summary>
         public float Speed = 20f;
 
-        /// <summary>
-        /// The physic material
-        /// </summary>
         public PhysicsMaterial2D PhysicMat;
 
-        /// <summary>
-        /// The size of radius / side of collider circle2D or box2D
-        /// </summary>
         public float ColliderSize = 1.5f;
 
-        /// <summary>
-        /// The size of radius / side of collider circle2D or box2D
-        /// </summary>
         public float LinearDrag = 0f;
 
-        /// <summary>
-        /// The size of radius / side of collider circle2D or box2D
-        /// </summary>
         public float AngularDrag = 0f;
 
-        /// <summary>
-        /// The size of radius / side of collider circle2D or box2D
-        /// </summary>
         public float GravityScale = 1f;
 
-        /// <summary>
-        /// Constrain rotation on Z axis.
-        /// </summary>
         public bool FreezeRotation = false;
 
-        /// <summary>
-		/// The X speed limit .
-		/// </summary>
 		public Vector2 SpeedLimiterX = new Vector2(-300, 300);
 
-        /// <summary>
-        /// The Y speed limit .
-        /// </summary>
         public Vector2 SpeedLimiterY = new Vector2(-300, 300);
 
-
-        /// <summary>
-        /// The simulation start in awake.
-        /// </summary>
         public bool SimulateOnAwake = true;
-
-        /// <summary>
-        /// Water system can perform in editor mode.
-        /// </summary>
         public bool SimulateInEditor = false;
 
-        /// <summary>
-        /// Water system can perform in play mode.
-        /// </summary>
         public bool SimulateInPlayMode = false;
 
-        /// <summary>
-        /// How many particles in the spawner?
-        /// </summary>
         public int DropCount = 100;
 
         public int _lastDropCount = 100;
 
-        /// <summary>
-        /// The responsible to spawn every particle once or repeat the spawn forever
-        /// </summary>
         public bool Loop = true;
 
-
-        /// <summary>
-        /// Currently amount of particles useing for the simulation (debug purposes only!)
-        /// </summary>
         public int DropsUsed;
 
-        /// <summary>
-        /// Apply setup changes over lifetime.
-        /// </summary>
         public bool DynamicChanges = true;
 
-        /// <summary>
-        /// List of events to call when shape will filled with water particles.
-        /// </summary>
         public Water2DEvents OnValidateShapeFill;
 
-        /// <summary>
-        /// The collider 2d array to be use to check the fill level.
-        /// </summary>
         public Collider2D[] ShapeFillCollider2D;
 
-        /// <summary>
-        /// The ShapeFillCollider2D amount.
-        /// </summary>
         public int ShapeFillCollider2DCount = 3;
 
-        /// <summary>
-        /// The shape fill accuracy 1 = 100%
-        /// </summary>
         public float ShapeFillAccuracy = 1f;
-        /// <summary>
-        /// List of gameobjects that have been collide with water particles .
-        /// </summary>
+
         public Water2DEvents OnCollisionEnterList;
 
-        /// <summary>
-        ///  List of gameobjects that will be notified when spawner is about to start .
-        /// </summary>
         public Water2DEvents OnSpawnerAboutStart;
 
-        /// <summary>
-        ///  List of gameobjects that will be notified when spawner is about to end .
-        /// </summary>
         public Water2DEvents OnSpawnerAboutEnd;
 
-        /// <summary>
-        ///  List of gameobjects that will be notified when spawner is emitting each particle .
-        /// </summary>
+        private Transform pointWater = null;
+        private SpriteRenderer sprWaterCircle = null;
+
+
         public Water2DEvents OnSpawnerEmitingParticle;
 
         private void Start()
         {
+            pointWater = transform.Find("Circle");
+            sprWaterCircle = pointWater.GetComponent<SpriteRenderer>();
+
             IsPlayIng = true;
             StartCoroutine(StartEnumerator());
             //Register
             SpawnersManager.ChangeSpawnerValues(instance);
         }
 
+        public void OnUpdateColor(Color co)
+        {
+            FillColor = co;
+            sprWaterCircle.color = co;
+        }
 
         private IEnumerator StartEnumerator()
         {
@@ -476,9 +297,6 @@
                 Debug.Log("setScale4: " + size);
                 WaterDropsObjects[i].layer = WaterDropsObjects[0].layer;
                 WaterDropsObjects[i].tag = ParticlesTag;
-                /*
-                Transform tt = WaterDropsObjects[i].transform.Find("_glow");
-                */
 
                 // Create glow
                 if (GlowEffect )
@@ -760,7 +578,7 @@
                     MetaBall.LifeTime = LifeTime;
                 }
                
-                WaterDropsObjects[i].transform.position = transform.position;
+                WaterDropsObjects[i].transform.position = pointWater.transform.position + new Vector3(0, -0.15f, 0);
                 MetaBall.Active = true;
                 MetaBall.witinTarget = false;
 
@@ -914,7 +732,7 @@
                         MetaBall.LifeTime = LifeTime;
                     }
 
-                    WaterDropsObjects [i].transform.position = transform.position;
+                    WaterDropsObjects [i].transform.position = pointWater.transform.position + new Vector3(0, -0.15f, 0);
 					
 
 					if (_initSpeed == Vector2.zero)
@@ -1034,15 +852,13 @@
             //{
                 for (int i = 0; i < WaterDropsObjects.Length; i++)
                 {
-
-
                     MetaballParticleClass MetaBall = WaterDropsObjects[i].GetComponent<MetaballParticleClass>();
 
                     if (MetaBall.Active == true)
                         continue;
 
                     MetaBall.LifeTime = LifeTime;
-                    WaterDropsObjects[i].transform.position = transform.position;
+                    WaterDropsObjects[i].transform.position = pointWater.transform.position + new Vector3(0, -0.15f, 0);
                     MetaBall.Active = true;
                     MetaBall.witinTarget = false;
 

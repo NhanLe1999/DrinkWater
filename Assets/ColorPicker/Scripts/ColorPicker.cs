@@ -64,7 +64,7 @@ namespace TS.ColorPicker
         private void HsbPicker_ValueChanged(HsbPicker sender, float hue, float saturation, float brightness)
         {
             var color = Color.HSVToRGB(hue, 1.0f, 1.0f);
-            DringCupManager.Instance.SetColor(color);
+            DringCupManager.Instance?.SetColor(color);
         }
         private void InputColorChannels_RGB_ValueChanged(InputColorChannels sender, Color color)
         {
