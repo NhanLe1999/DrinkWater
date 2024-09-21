@@ -16,6 +16,9 @@ public class DringCupManager : SingletonMono<DringCupManager>
 
     public void Init()
     {
+
+        transform.localScale = Vector3.one;
+
         p1 = transform.Find("p1");
         p2 = transform.Find("p2");
 
@@ -31,11 +34,11 @@ public class DringCupManager : SingletonMono<DringCupManager>
         }
     }
 
-    public void UpdateScale()
+    public void UpdateScale()   
     {
-        if(LogicGame.Instance.pointcheckCup.y - 0.5f < p1.transform.position.y)
+        if(LogicGame.Instance.pointcheckCup.y - 0.3f < p1.transform.position.y)
         {
-            var dis1 = LogicGame.Instance.pointcheckCup.y - 0.5f - transform.position.y;
+            var dis1 = LogicGame.Instance.pointcheckCup.y - 0.3f - transform.position.y;
             var dis2 = p1.transform.position.y - transform.position.y;
             float scale = Mathf.Abs(dis1 / dis2) * transform.localScale.x ;
             transform.localScale = Vector3.one * scale;

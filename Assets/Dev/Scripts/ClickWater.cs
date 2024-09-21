@@ -9,16 +9,42 @@ public class ClickWater : MonoBehaviour
 
     private void OnMouseDown()
     {
+        OnPlay();
+    }
+
+    private void OnMouseUp()
+    {
+        EndPlay();
+    }
+
+    void OnPlay()
+    {
         _Spawner.IsPlayIng = false; ;
         _Spawner?.StopSpawning();
         _Spawner.IsPlayIng = true;
         _Spawner?.Spawn();
     }
 
-    private void OnMouseUp()
+    void EndPlay()
     {
         _Spawner.IsPlayIng = false; ;
         _Spawner?.StopSpawning();
+    }
+
+    private void Start()
+    {
+        if (ScStaticScene.State == 3 || ScStaticScene.State == 2)
+        {
+            this.StartCoroutine(OnPlayWater());
+        }
+    }
+
+    IEnumerator OnPlayWater()
+    {
+        yield return new WaitForSeconds(0.2f);
+        OnPlay();
+        yield return new WaitForSeconds(1.0f);
+        EndPlay();
     }
 
 }

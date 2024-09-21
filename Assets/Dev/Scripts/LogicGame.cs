@@ -1,14 +1,10 @@
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
+using FlutterUnityIntegration;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Water2D;
 
 public enum StateGame
@@ -38,6 +34,7 @@ public class LogicGame : SingletonMono<LogicGame>
     [SerializeField] RectTransform objFruit = null;
     [SerializeField] RectTransform objChangeCup = null;
     [SerializeField] SliderColor sliderColor = null;
+    [SerializeField] Transform trsPointTop = null;
 
     public Vector2 pointcheckCup = Vector2.one;
 
@@ -63,16 +60,22 @@ public class LogicGame : SingletonMono<LogicGame>
             DringCupManager.Instance?.SetColor(co);
         };
 
-        LoadNumVn(2);
-        LoadUi();
+        if(ScStaticScene.State == 3 || ScStaticScene.State == 2)
+        {
+            this.StartCoroutine(onAutoLoadToping());
+        }
+        this.StartCoroutine(LoadNumVn(ScStaticScene.NumCup));
     }
 
-    public void LoadNumVn(int num)
+
+
+    public IEnumerator LoadNumVn(int num)
     {
+        yield return new WaitForSeconds(0.1f);
         numWater = num;
 
         SizeCamera = HelperManager.GetSizeCamera();
-        float disX = 0.15f;
+        float disX = 0.05f;
 
         var sizee = prefabWater.GetComponent<SpriteRenderer>().bounds.size;
         var SumSizeX = sizee.x * num + disX * (num - 1);
@@ -87,11 +90,12 @@ public class LogicGame : SingletonMono<LogicGame>
 
             var size = objWater.GetComponent<SpriteRenderer>().bounds.size;
             xBegin += size.x / 2;
-            objWater.transform.position = new Vector3(xBegin, SizeCamera.y / 2, 0);
+            objWater.transform.position = new Vector3(xBegin, trsPointTop.position.y, 0);
             xBegin += size.x / 2 + disX;
         }
 
         pointcheckCup = new Vector2(0, SizeCamera.y / 2 - sizee.y);
+        LoadUi();
 
     }
 
@@ -135,6 +139,19 @@ public class LogicGame : SingletonMono<LogicGame>
         toping.transform.localScale = Vector3.one * 0.5f;
     }
 
+    private IEnumerator onAutoLoadToping()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.35f));
+        var count = UnityEngine.Random.Range(1, 3);
+        for (int i = 0; i < count; i++)
+        {
+            var spr = dataTopingGame.dataToping[UnityEngine.Random.Range(0, dataTopingGame.dataToping.Count - 1)];
+            LoadToping(spr.spr);
+        }
+
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.35f));
+    }
+
     public void OnChangeColorForVnClick()
     {
         objChangeColorNc.gameObject.SetActive(true);
@@ -159,9 +176,14 @@ public class LogicGame : SingletonMono<LogicGame>
 
     public void OnBack()
     {
+
+#if UNITY_EDITOR
         HelperManager.OnLoadScene(ScStaticScene.HOME_SCENE);
-    }   
-    
+#else
+        UnityMessageManager.Instance.SendMessageToFlutter("back");
+#endif
+    }
+
     public void OnShowFruit()
     {
         if(isRunAnimFruit)
@@ -202,7 +224,7 @@ public class LogicGame : SingletonMono<LogicGame>
         {
             objChangeCup.DOAnchorPosX(200, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => {
                 objChangeCup.gameObject.SetActive(false);
-                isEnableFruit = false;
+                isEnableChangCup = false;
                 isRunAnimChangeCup = false;
             });
 
@@ -211,7 +233,7 @@ public class LogicGame : SingletonMono<LogicGame>
         {
             objChangeCup.gameObject.SetActive(true);
             objChangeCup.DOAnchorPosX(0, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => {
-                isEnableFruit = true;
+                isEnableChangCup = true;
                 isRunAnimChangeCup = false;
             });
         }

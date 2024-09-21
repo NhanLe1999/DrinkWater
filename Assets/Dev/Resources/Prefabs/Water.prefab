@@ -716,11 +716,11 @@ MonoBehaviour:
   StyleByID: 0
   Sorting: 0
   ColorScheme: 1
-  FillColor: {r: 0.36613172, g: 0.21037509, b: 0.19250609, a: 0.9}
+  FillColor: {r: 0, g: 0.049298525, b: 1, a: 1}
   StrokeColor: {r: 1, g: 1, b: 1, a: 0.8666667}
   _lastStrokeColor: {r: 1, g: 1, b: 1, a: 0.8666667}
-  Blending: 1
-  _lastBlending: 1
+  Blending: 0
+  _lastBlending: 0
   AlphaCutOff: 0.4
   AlphaStroke: 4
   TintColor: {r: 0, g: 0.4392157, b: 1, a: 1}
@@ -899,7 +899,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.049298525, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

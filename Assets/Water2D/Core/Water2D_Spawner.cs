@@ -727,7 +727,12 @@
 					if (_breakLoop || !IsPlayIng)
 						yield break;
 
-					MetaballParticleClass MetaBall = WaterDropsObjects [i].GetComponent<MetaballParticleClass> ();
+                    if (WaterDropsObjects == null || WaterDropsObjects[0] == null)
+                    {
+                        SetupParticles();
+                    }
+
+                    MetaballParticleClass MetaBall = WaterDropsObjects [i].GetComponent<MetaballParticleClass> ();
 
 					if (MetaBall.Active == true)
 						continue;
