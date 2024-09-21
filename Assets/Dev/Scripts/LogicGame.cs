@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,10 +34,17 @@ public class LogicGame : SingletonMono<LogicGame>
 
     [SerializeField] GameObject objChangeColorNc = null;
 
-    [SerializeField] GameObject objFruit = null;
-    [SerializeField] GameObject objChangeCup = null;
+    [SerializeField] RectTransform objFruit = null;
+    [SerializeField] RectTransform objChangeCup = null;
 
     int numWater = 0;
+
+    bool isEnableFruit = false;
+    bool isEnableChangCup = false;
+
+    bool isRunAnimFruit = false;
+    bool isRunAnimChangeCup = false;
+
 
     public Vector2 SizeCamera = Vector2.one;
 
@@ -48,7 +56,7 @@ public class LogicGame : SingletonMono<LogicGame>
     {
         SizeCamera = HelperManager.GetSizeCamera();
 
-        LoadNumVn(1);
+        LoadNumVn(2);
 
 
 
@@ -60,7 +68,7 @@ public class LogicGame : SingletonMono<LogicGame>
         numWater = num;
 
         SizeCamera = HelperManager.GetSizeCamera();
-        float disX = 0.5f;
+        float disX = 0.15f;
 
         var sizee = prefabWater.GetComponent<SpriteRenderer>().bounds.size;
         var SumSizeX = sizee.x * num + disX * (num - 1);
@@ -128,13 +136,16 @@ public class LogicGame : SingletonMono<LogicGame>
         cpn.sli1.callback = color => {
             water2D_Spawners[0].OnUpdateColor(color);
         };
+        cpn.sli1.UpdateStateHandleRect(water2D_Spawners[0].GetHSVColor());
 
         if (water2D_Spawners.Count > 1)
         {
             cpn.sli2.callback = color => {
                 water2D_Spawners[1].OnUpdateColor(color);
+
             };
-        }    
+            cpn.sli2.UpdateStateHandleRect(water2D_Spawners[1].GetHSVColor());
+        }
     }
 
     public void OnBack()
@@ -144,11 +155,56 @@ public class LogicGame : SingletonMono<LogicGame>
     
     public void OnShowFruit()
     {
-        objFruit.SetActive(true);
+        if(isRunAnimFruit)
+        {
+            return;
+        }
+
+        isRunAnimFruit = true;
+
+        if (isEnableFruit)
+        {
+            objFruit.DOAnchorPosX(-200, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => {
+                objFruit.gameObject.SetActive(false);
+                isEnableFruit = false;
+                isRunAnimFruit = false;
+            });
+        }
+        else
+        {
+            objFruit.gameObject.SetActive(true);
+            objFruit.DOAnchorPosX(0, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => {
+                isEnableFruit = true;
+                isRunAnimFruit = false;
+            });
+        }
     }   
     
     public void OnShowChangeCup()
     {
-        objChangeCup.SetActive(true);
+        if(isRunAnimChangeCup)
+        {
+            return;
+        }
+
+        isRunAnimChangeCup = true;
+
+        if (isEnableChangCup)
+        {
+            objChangeCup.DOAnchorPosX(200, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => {
+                objChangeCup.gameObject.SetActive(false);
+                isEnableFruit = false;
+                isRunAnimChangeCup = false;
+            });
+
+        }
+        else
+        {
+            objChangeCup.gameObject.SetActive(true);
+            objChangeCup.DOAnchorPosX(0, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => {
+                isEnableFruit = true;
+                isRunAnimChangeCup = false;
+            });
+        }
     }
 }

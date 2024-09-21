@@ -206,7 +206,18 @@
             StartCoroutine(StartEnumerator());
             //Register
             SpawnersManager.ChangeSpawnerValues(instance);
+
+            var color = Color.HSVToRGB(UnityEngine.Random.Range(0.0f, 1.0f), 1.0f, 1.0f);
+            OnUpdateColor(color);
         }
+
+        public float GetHSVColor()
+        {
+            float h = 0.0f, s = 0.0f, v = 0.0f;
+            Color.RGBToHSV(FillColor, out h, out s, out v);
+            return h;
+        }
+
 
         public void OnUpdateColor(Color co)
         {

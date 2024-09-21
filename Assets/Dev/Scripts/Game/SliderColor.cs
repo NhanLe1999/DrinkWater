@@ -46,4 +46,9 @@ public class SliderColor : MonoBehaviour
       
     }
 
+    public void UpdateStateHandleRect(float handel)
+    {
+        slider.value = handel;
+    }    
+
 }

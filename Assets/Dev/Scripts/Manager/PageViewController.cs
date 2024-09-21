@@ -129,7 +129,7 @@ public class PageViewController : MonoBehaviour
             scrollRect.transform.InverseTransformPoint(contentPanel.position).x -
             scrollRect.transform.InverseTransformPoint(target.transform.position).x + target.sizeDelta.x / 2;
 
-        contentPanel.DOAnchorPosX(newPos.x, 0.15f, true);
+        contentPanel.DOAnchorPosX(newPos.x, 0.15f, true).SetEase(Ease.OutQuad);
 
     }
 

@@ -35,6 +35,12 @@ public class ItemChangeCup : MonoBehaviour
             Destroy(c.gameObject);
         }
 
+        var cpns1 = GameObject.FindObjectsOfType<TopingItem>();
+        foreach (var c in cpns1)
+        {
+            Destroy(c.gameObject);
+        }
+
         ScStaticScene.dataCup = dataCup;
         LogicGame.Instance.LoadUi();
     }    
