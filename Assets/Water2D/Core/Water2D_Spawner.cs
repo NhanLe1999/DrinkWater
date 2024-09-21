@@ -1059,7 +1059,6 @@
 
                 for (int i = 0; i < WaterDropsObjects.Length; i++)
                 {
-
                     MetaballParticleClass MetaBall = WaterDropsObjects[i].GetComponent<MetaballParticleClass>();
 
                     //CHANGE COLOR

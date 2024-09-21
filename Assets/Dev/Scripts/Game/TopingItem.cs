@@ -31,6 +31,6 @@ public class TopingItem : MonoBehaviour
 
     public void OnUpdateUi()
     {
-        boxCollider2D.size = sprImg.bounds.size * 0.5f;
+        boxCollider2D.size = sprImg.bounds.size * 0.6f;
     }
 }

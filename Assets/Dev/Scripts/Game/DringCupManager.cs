@@ -34,15 +34,30 @@ public class DringCupManager : SingletonMono<DringCupManager>
         }
     }
 
-    public void UpdateScale()   
+    private IEnumerator DelayScale()
     {
-        if(LogicGame.Instance.pointcheckCup.y - 0.3f < p1.transform.position.y)
+        yield return new WaitForEndOfFrame();
+        if (LogicGame.Instance.pointcheckCup.y - 0.3f < p1.transform.position.y)
         {
             var dis1 = LogicGame.Instance.pointcheckCup.y - 0.3f - transform.position.y;
             var dis2 = p1.transform.position.y - transform.position.y;
-            float scale = Mathf.Abs(dis1 / dis2) * transform.localScale.x ;
-            transform.localScale = Vector3.one * scale;
+            float scale = Mathf.Abs(dis1 / dis2) * transform.localScale.x;
+
+            var size = gameObject.GetComponent<SpriteRenderer>().bounds.size;
+            float sceleX = 1.0f;
+
+            if (size.x > LogicGame.Instance.SizeCamera.x - 0.15f)
+            {
+                sceleX = (LogicGame.Instance.SizeCamera.x - 0.15f) / size.x;
+            }
+
+            transform.localScale = Vector3.one * Mathf.Min(sceleX, scale);
         }
+    }
+
+    public void UpdateScale()   
+    {
+        this.StartCoroutine(DelayScale());
     }
 
     public void SetColor(Color color)

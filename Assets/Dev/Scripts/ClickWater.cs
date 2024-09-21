@@ -10,10 +10,12 @@ public class ClickWater : MonoBehaviour
     private void OnMouseDown()
     {
         OnPlay();
+        Debug.Log("DCMMMMMMMMMMMM_OnMouseDown");
     }
 
     private void OnMouseUp()
     {
+        Debug.Log("DCMMMMMMMMMMMM_OnMouseUp");
         EndPlay();
     }
 
