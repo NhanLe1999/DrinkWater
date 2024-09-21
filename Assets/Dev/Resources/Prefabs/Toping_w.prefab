@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 5836708787284628549}
   - component: {fileID: 1011229065764806241}
   - component: {fileID: 1412920989091166317}
-  - component: {fileID: 1670882022626152403}
-  m_Layer: 3
-  m_Name: Toping
+  m_Layer: 6
+  m_Name: Toping_w
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +158,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 0.3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0.5
@@ -174,18 +173,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1670882022626152403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5083404355756421579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb2a0ea43112f747b13e8f22c56496c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buoyancyForce: 150
-  sinkingSpeed: 3
-  maxFloatHeight: 10

@@ -48,7 +48,7 @@ MonoBehaviour:
   - spr: {fileID: 1623377709, guid: b08bdfcacd8224b4680dcd939bfdf2d1, type: 3}
     type: 0
   - spr: {fileID: 20053688, guid: b08bdfcacd8224b4680dcd939bfdf2d1, type: 3}
-    type: 0
+    type: 1
   - spr: {fileID: -898717132, guid: b08bdfcacd8224b4680dcd939bfdf2d1, type: 3}
     type: 0
   - spr: {fileID: -1894695310, guid: b08bdfcacd8224b4680dcd939bfdf2d1, type: 3}
@@ -100,11 +100,11 @@ MonoBehaviour:
   - spr: {fileID: -297513037, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
     type: 0
   - spr: {fileID: -263490418, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
-    type: 0
+    type: 1
   - spr: {fileID: 208655738, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
     type: 0
   - spr: {fileID: 1543734023, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
-    type: 0
+    type: 1
   - spr: {fileID: 96150875, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
     type: 0
   - spr: {fileID: -2123871912, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
@@ -113,4 +113,3 @@ MonoBehaviour:
     type: 0
   - spr: {fileID: -673974504, guid: d51d90b0c99f0fa44b6d68f8cdecf4f4, type: 3}
     type: 0
-

@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Metaball_liquid
+  - Water
+  - Toping
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Toping_1
   - Water
   - UI
   - Toping

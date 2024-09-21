@@ -27,6 +27,7 @@ public class LogicGame : SingletonMono<LogicGame>
     private DringCupManager currentDrinkCupManager = null;
     [SerializeField] GameObject prefabWater = null;
     [SerializeField] GameObject prefabToping = null;
+    [SerializeField] GameObject prefabTopingDa = null;
     [SerializeField] public DataTopingGame dataTopingGame = null;
 
     [SerializeField] GameObject objChangeColorNc = null;
@@ -94,10 +95,21 @@ public class LogicGame : SingletonMono<LogicGame>
             xBegin += size.x / 2 + disX;
         }
 
-        pointcheckCup = new Vector2(0, SizeCamera.y / 2 - sizee.y);
+        pointcheckCup = new Vector2(0, trsPointTop.position.y - sizee.y);
         LoadUi();
 
     }
+
+    public void ResetWater()
+    {
+        foreach(var it in water2D_Spawners)
+        {
+           for(int i = 0; i < it.WaterDropsObjects.Length; i++)
+            {
+                it.WaterDropsObjects[i] = null;
+            }    
+        }    
+    }    
 
     public void LoadUi()
     {
@@ -127,14 +139,14 @@ public class LogicGame : SingletonMono<LogicGame>
         }
     }
 
-    public void LoadToping(Sprite spr)
+    public void LoadToping(DataToping spr)
     {
-        var toping = Instantiate(prefabToping, null);
+        var toping = Instantiate(spr.type.Equals(TYPE_TOPING.DEFAULT) ? prefabToping : prefabTopingDa, null);
         var cpn = toping.GetComponent<TopingItem>();
         var size = cpn.sprImg.bounds.size;
         toping.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-180, 180));
         toping.transform.position = new Vector3(UnityEngine.Random.Range(DringCupManager.Instance.p1.position.x + size.x / 2, DringCupManager.Instance.p2.position.x - size.x / 2), SizeCamera.y / 2 + size.y / 2);
-        cpn.SetData(spr);
+        cpn.SetData(spr.spr);
         cpn.OnUpdateUi();
         toping.transform.localScale = Vector3.one * 0.5f;
     }
@@ -146,7 +158,7 @@ public class LogicGame : SingletonMono<LogicGame>
         for (int i = 0; i < count; i++)
         {
             var spr = dataTopingGame.dataToping[UnityEngine.Random.Range(0, dataTopingGame.dataToping.Count - 1)];
-            LoadToping(spr.spr);
+            LoadToping(spr);
         }
 
         yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.35f));

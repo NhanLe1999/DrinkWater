@@ -37,9 +37,14 @@ public class DringCupManager : SingletonMono<DringCupManager>
     private IEnumerator DelayScale()
     {
         yield return new WaitForEndOfFrame();
-        if (LogicGame.Instance.pointcheckCup.y - 0.3f < p1.transform.position.y)
+       
+    }
+
+    public void UpdateScale()   
+    {
+        if (LogicGame.Instance.pointcheckCup.y - 0.25f < p1.transform.position.y)
         {
-            var dis1 = LogicGame.Instance.pointcheckCup.y - 0.3f - transform.position.y;
+            var dis1 = LogicGame.Instance.pointcheckCup.y - 0.25f - transform.position.y;
             var dis2 = p1.transform.position.y - transform.position.y;
             float scale = Mathf.Abs(dis1 / dis2) * transform.localScale.x;
 
@@ -53,10 +58,6 @@ public class DringCupManager : SingletonMono<DringCupManager>
 
             transform.localScale = Vector3.one * Mathf.Min(sceleX, scale);
         }
-    }
-
-    public void UpdateScale()   
-    {
         this.StartCoroutine(DelayScale());
     }
 

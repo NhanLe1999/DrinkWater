@@ -31,6 +31,6 @@ public class TopingSelectItem : MonoBehaviour
 
     public void OnChangeCup()
     {
-        LogicGame.Instance.LoadToping(dataToping.spr);
+        LogicGame.Instance.LoadToping(dataToping);
     }
 }
