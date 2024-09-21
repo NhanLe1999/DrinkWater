@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using TMPro;
@@ -36,6 +37,9 @@ public class LogicGame : SingletonMono<LogicGame>
 
     [SerializeField] RectTransform objFruit = null;
     [SerializeField] RectTransform objChangeCup = null;
+    [SerializeField] SliderColor sliderColor = null;
+
+    public Vector2 pointcheckCup = Vector2.one;
 
     int numWater = 0;
 
@@ -55,11 +59,11 @@ public class LogicGame : SingletonMono<LogicGame>
     private void Start()
     {
         SizeCamera = HelperManager.GetSizeCamera();
+        sliderColor.callback = co => {
+            DringCupManager.Instance?.SetColor(co);
+        };
 
         LoadNumVn(2);
-
-
-
         LoadUi();
     }
 
@@ -86,6 +90,9 @@ public class LogicGame : SingletonMono<LogicGame>
             objWater.transform.position = new Vector3(xBegin, SizeCamera.y / 2, 0);
             xBegin += size.x / 2 + disX;
         }
+
+        pointcheckCup = new Vector2(0, SizeCamera.y / 2 - sizee.y);
+
     }
 
     public void LoadUi()
@@ -102,6 +109,8 @@ public class LogicGame : SingletonMono<LogicGame>
         var cup = Instantiate(ScStaticScene.dataCup.prefabCup, parentCup);
         currentDrinkCupManager = cup.GetComponent<DringCupManager>();
         cup.transform.position = pointCup.position;
+        currentDrinkCupManager.Init();
+        currentDrinkCupManager.UpdateScale();
 
     }
 

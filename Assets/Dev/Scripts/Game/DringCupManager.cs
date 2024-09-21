@@ -10,6 +10,12 @@ public class DringCupManager : SingletonMono<DringCupManager>
 
     void Start()
     {
+       
+       // Destroy(gameObject.GetComponent<Rigidbody2D>());
+    }
+
+    public void Init()
+    {
         p1 = transform.Find("p1");
         p2 = transform.Find("p2");
 
@@ -23,11 +29,18 @@ public class DringCupManager : SingletonMono<DringCupManager>
         {
             HelperManager.SetLayerRecursively(spr.gameObject, "Cup");
         }
-
-       // Destroy(gameObject.GetComponent<Rigidbody2D>());
     }
 
-    
+    public void UpdateScale()
+    {
+        if(LogicGame.Instance.pointcheckCup.y - 0.5f < p1.transform.position.y)
+        {
+            var dis1 = LogicGame.Instance.pointcheckCup.y - 0.5f - transform.position.y;
+            var dis2 = p1.transform.position.y - transform.position.y;
+            float scale = Mathf.Abs(dis1 / dis2) * transform.localScale.x ;
+            transform.localScale = Vector3.one * scale;
+        }
+    }
 
     public void SetColor(Color color)
     {

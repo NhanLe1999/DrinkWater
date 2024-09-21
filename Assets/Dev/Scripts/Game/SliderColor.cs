@@ -25,8 +25,6 @@ public class SliderColor : MonoBehaviour
         var color = Color.HSVToRGB(value, 1.0f, 1.0f);
 
         callback?.Invoke(color);
-
-        DringCupManager.Instance?.SetColor(color);
     }
 
     IEnumerator ChangPoint()
