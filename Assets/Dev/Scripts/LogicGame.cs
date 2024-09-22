@@ -39,6 +39,8 @@ public class LogicGame : SingletonMono<LogicGame>
 
     public Vector2 pointcheckCup = Vector2.one;
 
+    public TextMeshProUGUI txtLog = null;
+
     int numWater = 0;
 
     bool isEnableFruit = false;
@@ -65,6 +67,12 @@ public class LogicGame : SingletonMono<LogicGame>
         {
             this.StartCoroutine(onAutoLoadToping());
         }
+
+        if(ScStaticScene.NumCup == 0)
+        {
+            ScStaticScene.NumCup = 1;
+        }    
+
         this.StartCoroutine(LoadNumVn(ScStaticScene.NumCup));
     }
 

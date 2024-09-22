@@ -402,9 +402,9 @@ body { padding: 0; margin: 0; overflow: hidden; }
 #endif
 
             if (isReleaseBuild) {
-                Debug.Log("-- iOS Release Build: SUCCESSFUL --");
+                Debug.Log(path + "-- iOS Release Build: SUCCESSFUL --");
             } else {
-                Debug.Log("-- iOS Debug Build: SUCCESSFUL --");
+                Debug.Log(path + "-- iOS Debug Build: SUCCESSFUL --");
             }
         }
 

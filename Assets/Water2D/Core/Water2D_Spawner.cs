@@ -684,17 +684,17 @@
 
                 return;
             }
-
-           
-
-           
         }
 
         bool _canInvokeAttheEnd = true;
         IEnumerator loop(Vector3 _pos, Vector2 _initSpeed, int count = -1, float delay = 0f, bool waitBetweenDropSpawn = true){
 
             if (IsSpawning)
+            {
+                LogicGame.Instance.txtLog.text = "DCMMMMMMMMMMMM_IsSpawning = false";
+                Debug.Log("cmmmm_IsSpawning");
                 yield break;
+            }
 
             if (Water2DEmissionType == EmissionType.FillerCollider)
             { Debug.LogError("You're trying spawn particles in a Filler type. You should create a water spawner instead"); yield break; }
@@ -720,12 +720,16 @@
                     yield break;
                 }
 
-
-
                 for (int i = 0; i < WaterDropsObjects.Length; i++) {
 
 					if (_breakLoop || !IsPlayIng)
-						yield break;
+                    {
+                        Debug.Log("cmmmm__breakLoop-!IsPlayIng___" + _breakLoop + "/" + "!IsPlayIng" + !IsPlayIng);
+
+                        LogicGame.Instance.txtLog.text = "cmmmm__breakLoop-!IsPlayIng___" + _breakLoop + "/" + "!IsPlayIng" + !IsPlayIng;
+
+                        yield break;
+                    }
 
                     if (WaterDropsObjects == null || WaterDropsObjects[0] == null)
                     {
@@ -864,9 +868,15 @@
             IsSpawning = true;
 
             int auxCount = 0;
-           // while (true)
+            // while (true)
             //{
-                for (int i = 0; i < WaterDropsObjects.Length; i++)
+
+            if (WaterDropsObjects == null || WaterDropsObjects[0] == null)
+            {
+                SetupParticles();
+            }
+
+            for (int i = 0; i < WaterDropsObjects.Length; i++)
                 {
                     MetaballParticleClass MetaBall = WaterDropsObjects[i].GetComponent<MetaballParticleClass>();
 
@@ -910,9 +920,6 @@
                             break;
                         }
                     }
-
-                    
-
                 }
                
                 //alreadySpawned = true;
