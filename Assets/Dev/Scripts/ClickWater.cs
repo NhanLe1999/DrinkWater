@@ -13,17 +13,14 @@ public class ClickWater : MonoBehaviour
         _Spawner?.StopSpawning();
         _Spawner.IsPlayIng = true;
         _Spawner?.Spawn();
-
-        LogicGame.Instance.txtLog.text = "DCMMMMMMMMMMMM_OnMouseDown";
-        Debug.Log("DCMMMMMMMMMMMM_OnMouseDown");
+        Audio.Play(ScStaticScene.SFX_rot_nuoc, 1.0f,true);
     }
 
     private void OnMouseUp()
     {
-        LogicGame.Instance.txtLog.text = "DCMMMMMMMMMMMM_OnMouseUp";
-        Debug.Log("DCMMMMMMMMMMMM_OnMouseUp");
         _Spawner.IsPlayIng = false; ;
         _Spawner?.StopSpawning();
+        Audio.Stop(ScStaticScene.SFX_rot_nuoc);
     }
 
     void OnPlay()

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<AudioSerialization xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <files>
+    <AudioFile>
+      <fileName>Music_Home</fileName>
+      <fullPath>Music/</fullPath>
+    </AudioFile>
+    <AudioFile>
+      <fileName>Music_Game</fileName>
+      <fullPath>Music/</fullPath>
+    </AudioFile>
+    <AudioFile>
+      <fileName>SFX_Click</fileName>
+      <fullPath>Sounds/</fullPath>
+    </AudioFile>
+    <AudioFile>
+      <fileName>SFX_rot_nuoc</fileName>
+      <fullPath>Sounds/</fullPath>
+    </AudioFile>
+    <AudioFile>
+      <fileName>SFX_sound_un</fileName>
+      <fullPath>Sounds/</fullPath>
+    </AudioFile>
+  </files>
+</AudioSerialization>

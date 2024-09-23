@@ -39,8 +39,6 @@ public class LogicGame : SingletonMono<LogicGame>
 
     public Vector2 pointcheckCup = Vector2.one;
 
-    public TextMeshProUGUI txtLog = null;
-
     int numWater = 0;
 
     bool isEnableFruit = false;
@@ -143,6 +141,7 @@ public class LogicGame : SingletonMono<LogicGame>
         if (SystemInfo.supportsAccelerometer)
         {
             Vector3 acceleration = Input.acceleration;
+            Debug.Log("acceleration__" + acceleration);
             Physics2D.gravity = new Vector2(acceleration.x * Mathf.Abs(baseGravity), acceleration.y * Mathf.Abs(baseGravity));
         }
     }

@@ -305,7 +305,6 @@
                 WaterDropsObjects[i].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 WaterDropsObjects[i].transform.SetParent(_parent.transform);
                 WaterDropsObjects[i].transform.localScale = new Vector3(size, size, 1f);
-                Debug.Log("setScale4: " + size);
                 WaterDropsObjects[i].layer = WaterDropsObjects[0].layer;
                 WaterDropsObjects[i].tag = ParticlesTag;
 
@@ -600,7 +599,6 @@
                 {
                     _initSpeed = initSpeed;
                     MetaBall.transform.localScale = new Vector3(size, size, 1f);
-                    Debug.Log("setScale1: " + size);
 
                     TrailRenderer tr = WaterDropsObjects[i].GetComponent<TrailRenderer>();
                     if (TrailStartSize <= 0f)
@@ -691,8 +689,6 @@
 
             if (IsSpawning)
             {
-                LogicGame.Instance.txtLog.text = "DCMMMMMMMMMMMM_IsSpawning = false";
-                Debug.Log("cmmmm_IsSpawning");
                 yield break;
             }
 
@@ -731,10 +727,6 @@
 
 					if (_breakLoop || !IsPlayIng)
                     {
-                        Debug.Log("cmmmm__breakLoop-!IsPlayIng___" + _breakLoop + "/" + "!IsPlayIng" + !IsPlayIng);
-
-                        LogicGame.Instance.txtLog.text = "cmmmm__breakLoop-!IsPlayIng___" + _breakLoop + "/" + "!IsPlayIng" + !IsPlayIng;
-
                         yield break;
                     }
 
@@ -865,9 +857,6 @@
         /// <param name="delay"></param>
         void SpawnAllParticles(Vector3 _pos, Vector2 _initSpeed, int count = -1, float delay = 0f)
         {
-            LogicGame.Instance.txtLog.text = "cmmmm__breakLoop-SpawnAllParticles";
-            Debug.Log("cmmmm__breakLoop-SpawnAllParticles");
-
             IsSpawning = true;
 
             int auxCount = 0;
@@ -898,7 +887,6 @@
                     {
                         _initSpeed = initSpeed;
                         MetaBall.transform.localScale = new Vector3(size, size, 1f);
-                        Debug.Log("setScale3: " + size);
 
                     //CHANGE COLOR
 

@@ -16,4 +16,11 @@ public class ScStaticScene
     public static string GAME_SCENE = "SceneGame";
     public static string HOME_SCENE = "HomeScene";
 
+    public static string KEY_SAVE_SOUND = "key_save_sound";
+    public static string KEY_SAVE_MUSIC = "key_save_music";
+
+    public static string SFX_Click = "SFX_Click";
+    public static string SFX_rot_nuoc = "SFX_rot_nuoc";
+    public static string SFX_sound_un = "SFX_sound_un";
+
 }
