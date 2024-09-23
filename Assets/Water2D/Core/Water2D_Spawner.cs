@@ -717,7 +717,14 @@
 
                 if (!IsPlayIng)
                 {
+                    Debug.Log("cmmmm_IsSpawning" + IsPlayIng);
+
                     yield break;
+                }
+
+                if (WaterDropsObjects == null || WaterDropsObjects[0] == null)
+                {
+                    SetupParticles();
                 }
 
                 for (int i = 0; i < WaterDropsObjects.Length; i++) {
@@ -729,11 +736,6 @@
                         LogicGame.Instance.txtLog.text = "cmmmm__breakLoop-!IsPlayIng___" + _breakLoop + "/" + "!IsPlayIng" + !IsPlayIng;
 
                         yield break;
-                    }
-
-                    if (WaterDropsObjects == null || WaterDropsObjects[0] == null)
-                    {
-                        SetupParticles();
                     }
 
                     MetaballParticleClass MetaBall = WaterDropsObjects [i].GetComponent<MetaballParticleClass> ();
@@ -863,7 +865,8 @@
         /// <param name="delay"></param>
         void SpawnAllParticles(Vector3 _pos, Vector2 _initSpeed, int count = -1, float delay = 0f)
         {
-           
+            LogicGame.Instance.txtLog.text = "cmmmm__breakLoop-SpawnAllParticles";
+            Debug.Log("cmmmm__breakLoop-SpawnAllParticles");
 
             IsSpawning = true;
 
