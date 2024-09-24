@@ -36,6 +36,10 @@ public class LogicGame : SingletonMono<LogicGame>
     [SerializeField] RectTransform objChangeCup = null;
     [SerializeField] SliderColor sliderColor = null;
     [SerializeField] Transform trsPointTop = null;
+    [SerializeField] SelectTopingManager selectTopingManager = null;
+
+    public List<DataToping> dataToping = new();
+
 
     public Vector2 pointcheckCup = Vector2.one;
 
@@ -56,6 +60,10 @@ public class LogicGame : SingletonMono<LogicGame>
 
     private void Start()
     {
+        UnityMessageManager.Instance.SendMessageToFlutter("sound_false");
+
+        Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
+
         SizeCamera = HelperManager.GetSizeCamera();
         sliderColor.callback = co => {
             DringCupManager.Instance?.SetColor(co);
@@ -133,16 +141,44 @@ public class LogicGame : SingletonMono<LogicGame>
         cup.transform.position = pointCup.position;
         currentDrinkCupManager.Init();
         currentDrinkCupManager.UpdateScale();
+        currentDrinkCupManager.IdCup = ScStaticScene.dataCup.IdCup;
 
+        dataToping = dataTopingGame.GetDataTopingByCupId(ScStaticScene.dataCup.IdCup);
+        selectTopingManager.OnLoadData();
     }
 
     private void Update()
     {
+
         if (SystemInfo.supportsAccelerometer)
         {
             Vector3 acceleration = Input.acceleration;
-            Debug.Log("acceleration__" + acceleration);
             Physics2D.gravity = new Vector2(acceleration.x * Mathf.Abs(baseGravity), acceleration.y * Mathf.Abs(baseGravity));
+
+            float tiltX = Input.acceleration.x;
+
+            float angle = Mathf.Asin(tiltX) * Mathf.Rad2Deg;
+
+            if(angle <= -45 || angle >= 45)
+            {
+                var cpns = GameObject.FindObjectsOfType<MetaballParticleClass>();
+
+                foreach (var c in cpns)
+                {
+                    if (c.Active)
+                    {
+                        Audio.Play(ScStaticScene.SFX_sound_un);
+                        break;
+                    }
+                }
+
+            }
+            else
+            {
+            }
+
+            Debug.Log("angele__" + acceleration + "______" + angle);
+
         }
     }
 
@@ -195,11 +231,13 @@ public class LogicGame : SingletonMono<LogicGame>
 
     public void OnBack()
     {
+        Audio.StopBackgroundMusic();
 
 #if UNITY_EDITOR
         HelperManager.OnLoadScene(ScStaticScene.HOME_SCENE);
 #else
         UnityMessageManager.Instance.SendMessageToFlutter("back");
+        UnityMessageManager.Instance.SendMessageToFlutter("sound_true");
 #endif
     }
 

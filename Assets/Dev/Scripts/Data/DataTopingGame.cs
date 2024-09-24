@@ -13,6 +13,7 @@ public enum TYPE_TOPING
 [Serializable]
 public class DataToping
 {
+    public List<int> listIdCup = null;
     public Sprite spr;
     public TYPE_TOPING type;
 }
@@ -21,5 +22,22 @@ public class DataToping
 public class DataTopingGame : ScriptableObject
 {
     public List<DataToping> dataToping = new();
+
+    public List<DataToping> GetDataTopingByCupId(int cupID)
+    {
+        List<DataToping> list = new();
+        foreach (var item in dataToping)
+        {
+            foreach(var id in item.listIdCup)
+            {
+                if(id.Equals(cupID))
+                {
+                    list.Add(item);
+                }
+            }    
+        }
+
+        return list;
+    }    
 }
 

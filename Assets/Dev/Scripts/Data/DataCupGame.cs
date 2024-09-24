@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class DataCup
 {
+    public int IdCup = 0;
     public Sprite sprImgSelect;
     public GameObject prefabCup;
     public Sprite sprImgChange;

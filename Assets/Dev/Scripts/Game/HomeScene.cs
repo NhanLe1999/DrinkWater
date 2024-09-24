@@ -1,3 +1,4 @@
+using FlutterUnityIntegration;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,4 +49,9 @@ public class HomeScene : MonoBehaviour
             HelperManager.OnLoadScene(ScStaticScene.GAME_SCENE);
         }
     }    
+
+    public void OnBack()
+    {
+        UnityMessageManager.Instance.SendMessageToFlutter("back");
+    }
 }

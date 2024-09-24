@@ -37,7 +37,7 @@ public class WDWoodFloat : MonoBehaviour
 
         if (collision.collider.tag == "Metaball_liquid")
         {
-            if(collision.collider.transform.position.y > transform.position.y)
+            if(collision.collider.transform.position.y - 0.25f > transform.position.y)
             {
                 isMove = true;
 

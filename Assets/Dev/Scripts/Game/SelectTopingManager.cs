@@ -13,7 +13,17 @@ public class SelectTopingManager : MonoBehaviour
 
     private void LoadData()
     {
-        foreach (var it in LogicGame.Instance.dataTopingGame.dataToping)
+        
+    }
+
+    public void OnLoadData()
+    {
+        for(int i = 0; i < trsContence.childCount; i++)
+        {
+            Destroy(trsContence.GetChild(i).gameObject);
+        }
+
+        foreach (var it in LogicGame.Instance.dataToping)
         {
             var ob = Instantiate(objPrefabCupChange, trsContence);
             var cpn = ob.GetComponent<TopingSelectItem>();

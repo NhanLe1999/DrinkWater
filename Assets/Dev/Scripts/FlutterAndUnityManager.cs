@@ -27,4 +27,24 @@ public class FlutterAndUnityManager : MonoBehaviour
         ScStaticScene.IsReplay = true;
         HelperManager.OnLoadScene(ScStaticScene.HOME_SCENE);
     }
+
+    public void OnOFFSound(string isEnable)
+    {
+        PlayerPrefs.SetString(ScStaticScene.KEY_SAVE_SOUND, isEnable);
+    }
+
+
+    public void OnOFFMusic(string isEnable)
+    {
+        PlayerPrefs.SetString(ScStaticScene.KEY_SAVE_MUSIC, isEnable);
+
+        if(isEnable.Equals("false"))
+        {
+            Audio.StopBackgroundMusic();
+        }
+        else
+        {
+            Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
+        }
+    }
 }

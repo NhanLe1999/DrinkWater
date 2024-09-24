@@ -7,6 +7,7 @@ public class DringCupManager : SingletonMono<DringCupManager>
     public List<SpriteRenderer> sprCup = null;
     public Transform p1 = null;
     public Transform p2 = null;
+    public int IdCup = 0;
 
     void Start()
     {

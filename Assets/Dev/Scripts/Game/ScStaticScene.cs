@@ -23,4 +23,7 @@ public class ScStaticScene
     public static string SFX_rot_nuoc = "SFX_rot_nuoc";
     public static string SFX_sound_un = "SFX_sound_un";
 
+    public static string SFX_Music_Game = "game_play";
+
+
 }
