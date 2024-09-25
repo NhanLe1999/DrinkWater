@@ -40,6 +40,8 @@ public class LogicGame : SingletonMono<LogicGame>
 
     public List<DataToping> dataToping = new();
 
+    bool isAutoToping = false;
+
 
     public Vector2 pointcheckCup = Vector2.one;
 
@@ -69,11 +71,6 @@ public class LogicGame : SingletonMono<LogicGame>
             DringCupManager.Instance?.SetColor(co);
         };
 
-        if(ScStaticScene.State == 3 || ScStaticScene.State == 2)
-        {
-            this.StartCoroutine(onAutoLoadToping());
-        }
-
         if(ScStaticScene.NumCup == 0)
         {
             ScStaticScene.NumCup = 1;
@@ -90,7 +87,7 @@ public class LogicGame : SingletonMono<LogicGame>
         numWater = num;
 
         SizeCamera = HelperManager.GetSizeCamera();
-        float disX = 0.05f;
+        float disX = 0.01f;
 
         var sizee = prefabWater.GetComponent<SpriteRenderer>().bounds.size;
         var SumSizeX = sizee.x * num + disX * (num - 1);
@@ -111,6 +108,12 @@ public class LogicGame : SingletonMono<LogicGame>
 
         pointcheckCup = new Vector2(0, trsPointTop.position.y - sizee.y);
         LoadUi();
+        if (ScStaticScene.State == 3 || ScStaticScene.State == 2)
+        {
+            isAutoToping = true;
+            this.StartCoroutine(CheckTimeLoadToping());
+            this.StartCoroutine(onAutoLoadToping());
+        }
 
     }
 
@@ -194,17 +197,34 @@ public class LogicGame : SingletonMono<LogicGame>
         toping.transform.localScale = Vector3.one * 0.5f;
     }
 
+    private IEnumerator CheckTimeLoadToping()
+    {
+        yield return new WaitForSeconds(1.5f);
+        isAutoToping = false;
+    }
+
     private IEnumerator onAutoLoadToping()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.35f));
+        yield return new WaitForEndOfFrame();
+        if (!isAutoToping)
+        {
+            yield break;
+        }
+
         var count = UnityEngine.Random.Range(1, 3);
         for (int i = 0; i < count; i++)
         {
-            var spr = dataTopingGame.dataToping[UnityEngine.Random.Range(0, dataTopingGame.dataToping.Count - 1)];
+            var spr = dataToping[UnityEngine.Random.Range(0, dataToping.Count - 1)];
             LoadToping(spr);
         }
 
+        if(!isAutoToping)
+        {
+            yield break;
+        }
+
         yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.35f));
+        this.StartCoroutine(onAutoLoadToping());
     }
 
     public void OnChangeColorForVnClick()

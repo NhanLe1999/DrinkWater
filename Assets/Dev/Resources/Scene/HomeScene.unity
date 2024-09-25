@@ -1703,6 +1703,7 @@ MonoBehaviour:
   ConformX: 1
   ConformY: 1
   Logging: 0
+  Canvas: {fileID: 193158285}
 --- !u!1 &1558814599
 GameObject:
   m_ObjectHideFlags: 0
