@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ItemChangeCup : MonoBehaviour
 {
     [SerializeField] Image imgIc = null;
+    [SerializeField] GameObject objAds = null;
 
     DataCup dataCup = null;
     void Start()
@@ -23,26 +24,51 @@ public class ItemChangeCup : MonoBehaviour
     {
         imgIc.sprite = dataCup.sprImgChange;
         imgIc.SetNativeSize();
-     
+        if(!dataCup.IsUseAds)
+        {
+            objAds.SetActive(false);
+        }
+
+#if UNITY_EDITOR
+        objAds.SetActive(false);
+#endif
+
     }
 
     public void OnChangeCup()
     {
-        var cpns = GameObject.FindObjectsOfType<MetaballParticleClass>();
+        Action<bool> callback = isSucess => { 
+            if(isSucess)
+            {
+                objAds.SetActive(false);
+                var cpns = GameObject.FindObjectsOfType<MetaballParticleClass>();
 
-        foreach (var c in cpns)
+                foreach (var c in cpns)
+                {
+                    c.Active = false;
+                }
+
+                var cpns1 = GameObject.FindObjectsOfType<TopingItem>();
+                foreach (var c in cpns1)
+                {
+                    Destroy(c.gameObject);
+                }
+
+
+                ScStaticScene.dataCup = dataCup;
+                LogicGame.Instance.LoadUi();
+            }
+        };
+
+        if(objAds.activeSelf)
         {
-            c.Active = false;
+            AdsFlutterAndUnityManager.instance.OnShowAdsInter(callback, ScStaticScene.NAME_TYPE_ADS_ITEM);
+        }
+        else
+        {
+            callback?.Invoke(true);
         }
 
-        var cpns1 = GameObject.FindObjectsOfType<TopingItem>();
-        foreach (var c in cpns1)
-        {
-            Destroy(c.gameObject);
-        }
-
-
-        ScStaticScene.dataCup = dataCup;
-        LogicGame.Instance.LoadUi();
+       
     }    
 }

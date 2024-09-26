@@ -63,6 +63,7 @@ public class LogicGame : SingletonMono<LogicGame>
     private void Start()
     {
         UnityMessageManager.Instance.SendMessageToFlutter("sound_false");
+        AdsFlutterAndUnityManager.instance.SenNameSceneToFluter(ScStaticScene.GAME_SCENE);
 
         Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
 
@@ -78,8 +79,6 @@ public class LogicGame : SingletonMono<LogicGame>
 
         this.StartCoroutine(LoadNumVn(ScStaticScene.NumCup));
     }
-
-
 
     public IEnumerator LoadNumVn(int num)
     {
@@ -152,7 +151,6 @@ public class LogicGame : SingletonMono<LogicGame>
 
     private void Update()
     {
-
         if (SystemInfo.supportsAccelerometer)
         {
             Vector3 acceleration = Input.acceleration;
@@ -315,4 +313,6 @@ public class LogicGame : SingletonMono<LogicGame>
             });
         }
     }
+
+    
 }

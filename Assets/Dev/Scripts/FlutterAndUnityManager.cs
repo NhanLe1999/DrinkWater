@@ -40,11 +40,11 @@ public class FlutterAndUnityManager : MonoBehaviour
 
         if(isEnable.Equals("false"))
         {
-            Audio.StopBackgroundMusic();
+            //Audio.StopBackgroundMusic();
         }
         else
         {
-            Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
+            //Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
         }
     }
 }

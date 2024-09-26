@@ -95,9 +95,6 @@ public class WDSafeArea : MonoBehaviour
     [SerializeField] bool ConformX = true;  // Conform to screen safe area on X-axis (default true, disable to ignore)
     [SerializeField] bool ConformY = true;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
     [SerializeField] bool Logging = false;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
-
-    [SerializeField] Canvas Canvas = null;
-
     void Awake()
     {
         Panel = GetComponent<RectTransform>();
@@ -122,12 +119,6 @@ public class WDSafeArea : MonoBehaviour
 
     void Update()
     {
-        if(Canvas != null)
-        {
-            var sizeCanvas = HelperManager.GetSizeOfCanvas(Canvas);
-            Debug.Log(sizeCanvas);
-        }
-
         Refresh();
     }
 

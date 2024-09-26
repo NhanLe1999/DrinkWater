@@ -116,9 +116,9 @@ public static class HelperManager
     #endregion
 
     #region LOAD_SCENE
-    public static void OnLoadScene(string scene)
+    public static void OnLoadScene(string scene, LoadSceneMode mode = LoadSceneMode.Single)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene, mode);
     }
 
     async public static UniTask LoadScene(string sceneName)

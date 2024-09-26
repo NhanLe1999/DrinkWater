@@ -1,7 +1,10 @@
+using Cysharp.Threading.Tasks;
 using FlutterUnityIntegration;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HomeScene : MonoBehaviour
 {
@@ -26,10 +29,25 @@ public class HomeScene : MonoBehaviour
     {
         ScStaticScene.dataCupGame = dataCupGame;
         pageViewController.SetData(dataCupGame.dataCups);
+
+        if (ScStaticScene.IsInitScene == 0)
+        {
+            ScStaticScene.IsInitScene++;
+            HelperManager.OnLoadScene(ScStaticScene.INIT_SCENE, LoadSceneMode.Additive);
+        }
+        LoadAds();
+    }
+
+    async void LoadAds()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+        AdsFlutterAndUnityManager.instance.SenNameSceneToFluter(ScStaticScene.HOME_SCENE);
     }
 
     public void OnPlayGame()
     {
+        
+
         if (sttate.Equals("play"))
         {
             ScStaticScene.NumCup = 1;

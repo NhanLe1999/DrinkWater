@@ -15,6 +15,8 @@ public class ScStaticScene
 
     public static string GAME_SCENE = "SceneGame";
     public static string HOME_SCENE = "HomeScene";
+    public static string INIT_SCENE = "InitScene";
+
 
     public static string KEY_SAVE_SOUND = "key_save_sound";
     public static string KEY_SAVE_MUSIC = "key_save_music";
@@ -24,6 +26,7 @@ public class ScStaticScene
     public static string SFX_sound_un = "SFX_sound_un";
 
     public static string SFX_Music_Game = "game_play";
+    public static string NAME_TYPE_ADS_ITEM = "reciver_item";
 
-
+    public static int IsInitScene = 0;
 }

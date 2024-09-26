@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class TopingSelectItem : MonoBehaviour
 {
     [SerializeField] Image imgIc = null;
-
     DataToping dataToping = null;
+    [SerializeField] GameObject objAds = null;
 
     public void SetData(DataToping da)
     {
@@ -29,8 +29,38 @@ public class TopingSelectItem : MonoBehaviour
         rect.localScale = Vector3.one * scale;
     }
 
+
+    public void EnableBtnAds(bool isEnable)
+    {
+        if(!isEnable)
+        {
+            objAds.SetActive(false);
+        }
+#if UNITY_EDITOR
+        objAds.SetActive(false);
+#endif
+    }
+
+
+
     public void OnChangeCup()
     {
-        LogicGame.Instance.LoadToping(dataToping);
+        Action<bool> callback = isSucess => { 
+            if(isSucess)
+            {
+                objAds.SetActive(false);
+                LogicGame.Instance.LoadToping(dataToping);
+            }
+        };
+
+        if (objAds.activeSelf)
+        {
+            AdsFlutterAndUnityManager.instance.OnShowAdsInter(callback, ScStaticScene.NAME_TYPE_ADS_ITEM);
+        }
+        else
+        {
+            callback?.Invoke(true);
+        }
+
     }
 }

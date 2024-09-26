@@ -23,12 +23,17 @@ public class SelectTopingManager : MonoBehaviour
             Destroy(trsContence.GetChild(i).gameObject);
         }
 
+        int id = 0;
+        var max = LogicGame.Instance.dataToping.Count <= 2 ? 1 : 2;
+
         foreach (var it in LogicGame.Instance.dataToping)
         {
             var ob = Instantiate(objPrefabCupChange, trsContence);
             var cpn = ob.GetComponent<TopingSelectItem>();
             cpn.SetData(it);
             cpn.UpdateUi();
+            cpn.EnableBtnAds(id >= max);
+            id++;
         }
     }
 }

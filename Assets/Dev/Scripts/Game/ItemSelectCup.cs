@@ -27,7 +27,21 @@ public class ItemSelectCup : MonoBehaviour
 
     public void OnClickCup()
     {
-        ScStaticScene.dataCup = data;
-        HelperManager.LoadScene(ScStaticScene.GAME_SCENE);
-    }    
+        Action<bool> callback = isSucess => { 
+            if(isSucess)
+            {
+                ScStaticScene.dataCup = data;
+                HelperManager.LoadScene(ScStaticScene.GAME_SCENE);
+            }
+        };
+
+
+#if UNITY_EDITOR
+        callback?.Invoke(true);
+        return;
+#endif
+
+        AdsFlutterAndUnityManager.instance.OnShowAdsInter(callback, ScStaticScene.NAME_TYPE_ADS_ITEM);
+
+    }
 }
