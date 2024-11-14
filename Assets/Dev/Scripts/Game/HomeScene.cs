@@ -14,6 +14,7 @@ public class HomeScene : MonoBehaviour
     [SerializeField] PageViewController pageViewController;
     [SerializeField] DataCupGame dataCupGame = null;
     [SerializeField] GameObject objPlay = null;
+    public CanvasGroup canvasGroup = null;
 
     private void Awake()
     {
@@ -35,7 +36,6 @@ public class HomeScene : MonoBehaviour
             ScStaticScene.IsInitScene++;
             HelperManager.OnLoadScene(ScStaticScene.INIT_SCENE, LoadSceneMode.Additive);
         }
-        LoadAds();
     }
 
     async void LoadAds()
@@ -52,11 +52,13 @@ public class HomeScene : MonoBehaviour
         {
             ScStaticScene.NumCup = 1;
             ScStaticScene.State = 1;
+            LoadAds();
         }
         else if (sttate.Equals("drink"))
         {
             ScStaticScene.NumCup = 1;
             ScStaticScene.State = 2;
+            LoadAds();
         }
         else if (sttate.Equals("buffet"))
         {

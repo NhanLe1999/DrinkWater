@@ -37,6 +37,7 @@ public class AdsFlutterAndUnityManager : MonoBehaviour
         Time.timeScale = 0.0f;
         callbackAds = callback;
         UnityMessageManager.Instance.SendMessageToFlutter("showAds_inter_" + type);
+        OnReciverCallbackAdsInter("showAds_reciver_item_true");
     }
 
     public void OnReciverCallbackAdsInter(string message)

@@ -33,6 +33,10 @@ public class ItemSelectCup : MonoBehaviour
                 ScStaticScene.dataCup = data;
                 HelperManager.LoadScene(ScStaticScene.GAME_SCENE);
             }
+            else
+            {
+                HomeScene.Instance.canvasGroup.alpha = 1;
+            }
         };
 
 
@@ -42,6 +46,7 @@ public class ItemSelectCup : MonoBehaviour
 #endif
 
         AdsFlutterAndUnityManager.instance.OnShowAdsInter(callback, ScStaticScene.NAME_TYPE_ADS_ITEM);
+        HomeScene.Instance.canvasGroup.alpha = 0;
 
     }
 }

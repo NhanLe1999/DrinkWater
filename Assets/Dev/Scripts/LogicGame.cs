@@ -65,7 +65,7 @@ public class LogicGame : SingletonMono<LogicGame>
         UnityMessageManager.Instance.SendMessageToFlutter("sound_false");
         AdsFlutterAndUnityManager.instance.SenNameSceneToFluter(ScStaticScene.GAME_SCENE);
 
-        Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
+        //Audio.PlayBackgroundMusic(ScStaticScene.SFX_Music_Game);
 
         SizeCamera = HelperManager.GetSizeCamera();
         sliderColor.callback = co => {
